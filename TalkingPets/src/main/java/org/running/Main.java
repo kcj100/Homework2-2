@@ -5,7 +5,7 @@ import pets.Dog;
 import pets.Hamster;
 import pets.Pet;
 
-import java.util.*;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -21,7 +21,7 @@ public class Main {
     }
 
     private static void petInquirer(Scanner scanner, int petAmount) {
-        List<Pet> petList = new ArrayList<>();
+        Pet[] petArray = new Pet[petAmount];
         System.out.println("What kind are each one of your pets? Also, give each one of their names right after...");
         System.out.println();
         for(int i = 1; i <= petAmount; i++) {
@@ -32,10 +32,10 @@ public class Main {
             String nameOfPet = scanner.next();
             Pet pet = petParser(kindOfPet, nameOfPet);
             System.out.println();
-            petList.add(pet);
+            petArray[i - 1] = pet;
         }
-        for (Pet i : petList) {
-            System.out.println("Kind of Pet: " + i.getClass().toString().substring(11)+ ", Name: " + i.getName() + ", Sound: " + i.speak());
+        for (Pet i : petArray) {
+            System.out.println("Kind of Pet: " + i.getClass().getSimpleName() + ", Name: " + i.getName() + ", Sound: " + i.speak());
         }
     }
 
