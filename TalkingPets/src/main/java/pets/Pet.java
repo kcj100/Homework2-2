@@ -1,7 +1,13 @@
 package pets;
 
-public abstract class Pet {
+import java.util.Comparator;
+
+public abstract class Pet implements Comparable<Pet> {
     private String name;
+    protected static final Comparator<Pet> COMPARATOR =
+            Comparator.comparing(Pet::getName)
+                    .thenComparing((Pet pet) ->
+                            pet.getClass().getSimpleName());
 
     public Pet(String name) {
         this.name = name;
@@ -15,6 +21,11 @@ public abstract class Pet {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public int compareTo(Pet pet) {
+        return COMPARATOR.compare(this, pet);
     }
 
 }
